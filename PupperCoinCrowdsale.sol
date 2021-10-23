@@ -8,16 +8,25 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/distribution/RefundablePostDeliveryCrowdsale.sol";
 
 // Inherit the crowdsale contracts
-contract PupperCoinSale is Crowdsale, MintedCrowdsale, CappedCrowdsale, TimedCrowdsale, RefundablePostDeliveryCrowdsale {
+contract PupperCrowdCoinSale is Crowdsale, MintedCrowdsale, CappedCrowdsale, TimedCrowdsale, RefundablePostDeliveryCrowdsale {
 
     constructor(
         uint rate,              // Rate in Token bits
         address payable wallet, // Contract beneficiary
-        PupperCoin Token        // The Token to be created.
+        PupperCoin Token,        // The Token to be created.
+        uint256 cap,            // total capacity in wei (1 quintillion wei = 1 ether)
+        uint256 openingTime,    // Opening time in UNIX epoch seconds
+        uint256 closingTime     // Closing time in UNIX epoch seconds
     )
+        PupperCrowdCoinSale(rate, wallet, Token, cap, openingTime, closingTime)
         // Pass the constructor parameters to the crowdsale contracts.
-        Crowdsale()
-        PupperCoinSale(rate, wallet, Token)
+        // https://docs.openzeppelin.com/contracts/2.x/crowdsales
+        MintedCrowdsale()
+        // calculate rate: https://docs.openzeppelin.com/contracts/2.x/crowdsales#crowdsale-rate
+        Crowdsale(rate, wallet, Token)
+        CappedCrowdsale(cap)
+        TimedCrowdsale(openingTime, closingTime)
+        RefundablePostDeliveryCrowdsale()
         public
     {
         // constructor can stay empty
@@ -42,7 +51,7 @@ contract PupperCoinSaleDeployer {
         
 
         // Create the PupperCoinSale and tell it about the token, set the goal, and set the open and close times to now and now + 24 weeks.
-        PupperCoinSale coin_sale = new PupperCoinSale(1, wallet, token);
+        PupperCrowdCoinSale coin_sale = new PupperCrowdCoinSale(1, wallet, token, 1000, now, now + 10 days);
         token_sale_address = address(coin_sale);
         
         // make the PupperCoinSale contract a minter, then have the PupperCoinSaleDeployer renounce its minter role
