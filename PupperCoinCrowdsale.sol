@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.5.5;
 
 import "./PupperCoin.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/Crowdsale.sol";
@@ -26,7 +26,7 @@ contract PupperCrowdCoinSale is Crowdsale, MintedCrowdsale, CappedCrowdsale, Tim
         Crowdsale(rate, wallet, Token)
         CappedCrowdsale(cap)
         TimedCrowdsale(openingTime, closingTime)
-        RefundablePostDeliveryCrowdsale()
+        RefundableCrowdsale(2000)
         public
     {
         // constructor can stay empty
