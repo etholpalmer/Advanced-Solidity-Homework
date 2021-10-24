@@ -110,12 +110,16 @@ Include information such as the token parameters, token name, crowdsale cap, etc
 ##### To receive all points, your code must:
 
 * Test the Crowdsale by sending ether to a different account, then add screenshots of this to the ReadME.md. (10 points)
+[alt text](~/Images/PupperCoin02.png "Connected to Ropsten TestNet")
 * Set up the Crowdsale's finalize function with the assigned criteria. (10 points)
+[alt text](~/Images/PupperCoin03.png "Connected to Ropsten TestNet")
 * Properly set up the RefundablePostDeliveryCrowdsale. (10 points)
+[alt text](~/Images/PupperCoin04.png "Connected to Ropsten TestNet")
 * Deploy the Crowdsale to either the Kovan or Ropsten testnet, then add screenshots of this to the ReadMe.md. (10 points)
+[alt text](~/Images/PupperCoin01.png "Connected to Ropsten TestNet")
 
 #### Coding Conventions and Formatting (10 points)
-
+[alt text](~/Images/PupperCoin01-a.png "Connected to Ropsten TestNet")
 ##### To receive all points, your code must:
 
 * Place imports at the beginning of the file, just after any module comments and docstrings and before module globals and constants. (3 points)
